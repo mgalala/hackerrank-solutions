@@ -94,15 +94,21 @@ public class RoadsAndLibariries {
 			}
 		}
 
-		int totalMinumum = 0;
-		int totalCitiesAppeared = 0;
+		Long totalMinumum = 0L;
+		Long totalCitiesAppeared = 0L;
 		// calculate costs of repairing roads
 		for (Map.Entry<Integer, TreeSet<Integer>> entry : groupOfCities.entrySet()) {
 			// calculate cost of fixing roads
-			int size = entry.getValue().size();
-			int costOfFixingRoadsInThisEntry = (Integer.valueOf(size - 1) * Integer.valueOf(c_road)) + c_lib;
+			Integer size = entry.getValue().size();
+			Integer costOfFixingRoadsInThisEntry;
+			if (size > 1) {
+				costOfFixingRoadsInThisEntry = ((size - 1) * c_road) + c_lib;
+			} else {
+				// if city is isolated, then there is no way but building a new lib
+				costOfFixingRoadsInThisEntry = Integer.MAX_VALUE;
+			}
 			// calculate cost of building lib in each city
-			int costOfLibInEachCity = size * c_lib;
+			Integer costOfLibInEachCity = size * c_lib;
 			totalMinumum = totalMinumum + Math.min(costOfFixingRoadsInThisEntry, costOfLibInEachCity);
 			totalCitiesAppeared = totalCitiesAppeared + size;
 		}
