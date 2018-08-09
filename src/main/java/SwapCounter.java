@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Solution {
+public class SwapCounter {
 
 	// Complete the countSwaps function below.
 	static void countSwaps(int[] a) {
